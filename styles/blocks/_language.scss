@@ -1,0 +1,46 @@
+/*----------------------------------language--------------------------------*/
+.language {
+    position: relative;
+    z-index: 99;
+    font-family: 'Inter';
+    display: inline-block;
+    cursor: pointer;
+	&__btn {
+        background-color: inherit;
+        color: var(--color-yellow);
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        cursor: pointer;
+        font-size: 18px;
+        width: 30px;
+        margin-right: 15px;
+	}
+	&__arrow {
+       margin-top: -5px;
+       &.up {
+          transform: rotate(180deg);
+          margin-top: 0px;
+       }
+	}
+	&__dropdown {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        border-radius: 4px;
+        display: none;
+        z-index: 100;
+	}
+}
+.language__dropdown._show {
+  display: block;
+}
+.language-option {
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--color-yellow);
+}
+
+/*----------------------------------language--------------------------------*/
+

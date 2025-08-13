@@ -59,5 +59,15 @@
         margin-top: 0px;
     }
 }
-
+.accordion__title {
+    cursor: pointer;
+}
+.accordion__content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+}
+.accordion__content.active {
+  max-height: 500px; 
+}
 /*----------------------------------accordion--------------------------------*/

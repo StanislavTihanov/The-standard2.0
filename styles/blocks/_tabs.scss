@@ -48,4 +48,10 @@
   input[type="radio"] {
     display: none;
   }
+.tabs__content {
+  display: none;
+}
+.tabs__content.active-tab {
+  display: block;
+}
 /*---------------------------------------tabs----------------------------*/

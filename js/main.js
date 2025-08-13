@@ -45,13 +45,13 @@
 
 
 //------------------------------------------------------------------------появление бекграунда у шапки при прокрутки вниз
-window.addEventListener('scroll', () => {
-  if(pageYOffset > 50) {
-    document.querySelector('.header').classList.add('header__bg');
-  } else {
-    document.querySelector('.header').classList.remove('header__bg');
-  }
-});
+//window.addEventListener('scroll', () => {
+//  if(pageYOffset > 50) {
+//    document.querySelector('.header').classList.add('header__bg');
+//  } else {
+//    document.querySelector('.header').classList.remove('header__bg');
+//  }
+//});
 //------------------------------------------------------------------------появление бекграунда у шапки при прокрутки вниз
 
 
@@ -73,12 +73,7 @@ window.addEventListener('scroll', () => {
 //    }
 //  });
 //});
-
 //------------------------------------------------------------------------search
-
-
-
-
 
 //------------------------------------------------------------------------Меню-Бургер
 const burgerMenu = document.querySelector('.burger');
@@ -99,6 +94,15 @@ document.addEventListener ('click', (e) => {
 })
 //------------------------------------------------------------------------закрытие меню при клике вне его
 
+//------------------------------------------------------------------------Fancybox
+//document.addEventListener("DOMContentLoaded", function () {
+//  if (typeof Fancybox !== "undefined" && typeof Fancybox.bind === "function") {
+//      Fancybox.bind("[data-fancybox]", {
+//          // Кастомные опции
+//      });
+//  }
+//});
+//------------------------------------------------------------------------Fancybox
 
 //------------------------------------------------------------------------Прокрутка при клике
 //let buttons = document.querySelectorAll('.menu__link');
@@ -592,169 +596,216 @@ document.addEventListener ('click', (e) => {
 //  });
 //});
 ////------------------------------------------------------------------------Обработка форм
-//------------------------------------------------------------------------Quiz
+//------------------------------------------------------------------------Убераем весячие предлоги
+document.addEventListener("DOMContentLoaded", function () {
+  const prepositions = [" в", " с", " на", " по", " о", " к", " у", " и", " за", " из", " от", "для", "над"];
 
-document.addEventListener('DOMContentLoaded', () => {
-  const quizBody = document.querySelector('.quiz__body');
-  const quizStart = document.querySelector('.quiz__start');
-  const formQuiz = document.querySelector('.quiz-form');
-  const formItems = formQuiz.querySelectorAll('fieldset');
-  const formBtnNext = formQuiz.querySelectorAll('.quiz-form__btn-next');
-  const formBtnPrev = formQuiz.querySelectorAll('.quiz-form__btn-prev');
-  const overlay = document.querySelector('.overlay');
-  const pastTestButton = document.querySelector('.pas__test-button');
-
-  const answersObj = {
-    step0: { question: '', answers: [] },
-    step1: { question: '', answers: [] },
-    step2: { question: '', answers: [] },
-    step3: { question: '', answers: [] },
-    step4: { name: "", phone: "", email: "", call: "" },
-  };
-
-  let questionNumb = 1;
-
-  // Инициализация квиза
-  quizBody.style.display = "none";
-  overlay.style.display = "none";
-
-  quizStart.addEventListener('click', () => {
-    quizBody.style.display = "block";
-    quizStart.style.display = "none";
-    questionCounter(1);
-  });
-
-  pastTestButton.addEventListener('click', () => {
-    resetQuiz();
-    overlay.style.display = "block";
-    quizBody.style.display = "block";
-  });
-
-  function questionCounter(index) {
-    const quizIndicator = document.querySelector('.quiz-indicator');
-    quizIndicator.innerHTML = `${index} / ${formItems.length}`;
-
-    const progress = document.querySelector(".quiz__progress-inner");
-    progress.style.width = `${Math.round((index / formItems.length) * 100)}%`;
-  }
-
-  function resetQuiz() {
-    formItems.forEach((formItem, index) => {
-      formItem.style.display = index === 0 ? "block" : "none";
-      const inputs = formItem.querySelectorAll("input");
-      inputs.forEach(input => {
-        input.checked = false;
-        input.parentNode.classList.remove("active-radio", "active-checkbox");
-      });
-    });
-    formBtnNext.forEach(btn => btn.disabled = true);
-    questionNumb = 1;
-    questionCounter(questionNumb);
-  }
-
-  formBtnPrev.forEach((btn, i) => {
-    btn.addEventListener('click', (event) => {
-      event.preventDefault();
-      formItems[i + 1].style.display = "none";
-      formItems[i].style.display = "block";
-      questionNumb--;
-      questionCounter(questionNumb);
-    });
-  });
-
-  formBtnNext.forEach((btn, btnIndex) => {
-    btn.addEventListener('click', (event) => {
-      event.preventDefault();
-      formItems[btnIndex].style.display = "none";
-      formItems[btnIndex + 1].style.display = "block";
-      questionNumb++;
-      questionCounter(questionNumb);
-    });
-    btn.disabled = true;
-  });
-
-  formItems.forEach((formItem, formItemIndex) => {
-    if (formItemIndex === 0) {
-      formItem.style.display = "block";
+  function replacePrepositions(node) {
+    if (node.nodeType === Node.TEXT_NODE) {
+      node.textContent = node.textContent.replace(
+        new RegExp(`(${prepositions.join("|")}) `, "gi"),
+        "$1\u00A0" // \u00A0 — неразрывный пробел
+      );
     } else {
-      formItem.style.display = "none";
+      for (let child of node.childNodes) {
+        replacePrepositions(child);
+      }
     }
-
-    if (formItemIndex !== formItems.length - 1) {
-      const itemTitle = formItem.querySelector('.quiz-form__title');
-      answersObj[`step${formItemIndex}`].question = itemTitle.textContent;
-
-      formItem.addEventListener('change', (event) => {
-        const target = event.target;
-        const inputsChecked = formItem.querySelectorAll("input:checked");
-
-        answersObj[`step${formItemIndex}`].answers = Array.from(inputsChecked).map(input => input.value);
-        formBtnNext[formItemIndex].disabled = inputsChecked.length === 0;
-
-        if (target.classList.contains("quiz-form__radio")) {
-          formItem.querySelectorAll(".quiz-form__radio").forEach(input => {
-            input.parentNode.classList.toggle("active-radio", input === target);
-          });
-        } else if (target.classList.contains("quiz-form__checkbox")) {
-          target.parentNode.classList.toggle("active-checkbox");
-        }
-      });
-    }
-  });
-
-  const nameInput = document.getElementById('quiz-name');
-  const phoneInput = document.getElementById('quiz-phone');
-  const emailInput = document.getElementById('quiz-email');
-  const policyCheckbox = document.getElementById('quiz-policy');
-
-  if (!nameInput || !phoneInput || !emailInput || !policyCheckbox) {
-    console.error("Один из элементов формы не найден!");
-    return;
   }
 
-  formQuiz.addEventListener('submit', (event) => {
-    event.preventDefault();
-
-    answersObj.step4.name = nameInput.value.trim();
-    answersObj.step4.phone = phoneInput.value.trim();
-    answersObj.step4.email = emailInput.value.trim();
-
-    if (!answersObj.step4.name || !answersObj.step4.phone || !answersObj.step4.email) {
-      alert("Пожалуйста, заполните все поля.");
-      return;
-    }
-
-    if (!policyCheckbox.checked) {
-      alert("Дайте согласие на обработку персональных данных.");
-      return;
-    }
-
-    postData(answersObj)
-      .then(res => res.json())
-      .then(res => {
-        if (res.status === "ok") {
-          overlay.style.display = "none";
-          quizBody.style.display = "none";
-          quizStart.style.display = "block";
-          formQuiz.reset();
-          alert(res.message);
-        } else if (res.status === "error") {
-          alert(res.message);
-        }
-      })
-      .catch(error => {
-        console.error("Ошибка при отправке формы:", error);
-        alert("Небходимо подключить серверную часть");
-      });
-  });
-
-  function postData(body) {
-    return fetch("./server.php", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(body)
-    });
-  }
+  replacePrepositions(document.body);
 });
+//------------------------------------------------------------------------Убераем весячие предлоги
+//------------------------------------------------------------------------Tabs
+//const tabsButton = document.querySelectorAll('.tabs-button');
+//const tabsContent = document.querySelectorAll('.tabs__content');
+//
+//tabsButton.forEach((tab, index) => {
+//  tab.addEventListener('click', () => {
+//    tabsButton.forEach(tab => {tab.classList.remove('active-tab')});
+//    tab.classList.add('active-tab');
+//    
+//    tabsContent.forEach(content => {content.classList.remove('active-tab')})
+//    tabsContent[index].classList.add('active-tab');
+//  });
+//});
+//------------------------------------------------------------------------Tabs
 
-//------------------------------------------------------------------------Quiz
+//------------------------------------------------------------------------Аккардион
+//document.querySelectorAll('.accordion__title').forEach(title => {
+//  title.addEventListener('click', () => {
+//    const contentId = title.getAttribute('data-a');
+//    const content = document.querySelector(`[data-a-content="${contentId}"]`);
+//    const isOpen = content.classList.contains('active');
+//    
+//    // Закрываем все аккордеоны
+//    document.querySelectorAll('.accordion__content').forEach(item => {
+//      item.classList.remove('active');
+//      item.previousElementSibling.querySelector('span').textContent = '';
+//    });
+//    
+//    // Открываем текущий, если он был закрыт
+//    if (!isOpen) {
+//      content.classList.add('active');
+//      title.querySelector('span').textContent = '-';
+//    }
+//  });
+//});
+//------------------------------------------------------------------------Аккардион
+//------------------------------------------------------------------------Переключение языков
+// Конфигурация поддерживаемых языков
+//const languages = {
+//  en: {
+//    name: "EN",
+//    file: "en.json"  // Файл с переводами для английского
+//  },
+//  ru: {
+//    name: "RU",
+//    file: "ru.json"  // Файл с переводами для русского
+//  }
+//};
+//
+//// Получаем необходимые элементы DOM
+//const languageBtn = document.getElementById('language-btn');        // Кнопка переключения языка
+//const currentLanguage = document.getElementById('current-language'); // Текущий язык
+//const languageDropdown = document.getElementById('language-dropdown'); // Выпадающий список
+//const arrow = document.querySelector('.language__arrow');           // Стрелка для индикации
+//
+//// Текущий язык и загруженные переводы
+//let currentLang = 'ru';  // По умолчанию русский
+//let translations = {};   // Здесь будут храниться все переводы
+//
+//// 1. Инициализация приложения
+//async function init() {
+//  // Определяем предпочтительный язык пользователя
+//  currentLang = getPreferredLanguage();
+//  
+//  // Загружаем переводы для выбранного языка
+//  await loadTranslations(currentLang);
+//  
+//  // Обновляем интерфейс согласно переводам
+//  updateUI();
+//  
+//  // Создаем выпадающий список с доступными языками
+//  createLanguageDropdown();
+//  
+//  // Настраиваем обработчики событий
+//  setupEventListeners();
+//}
+//
+//// 2. Определение предпочтительного языка
+//function getPreferredLanguage() {
+//  // Проверяем сохраненный в localStorage выбор
+//  const savedLang = localStorage.getItem('lang');
+//  if (savedLang && languages[savedLang]) return savedLang;
+//  
+//  // Если сохраненного выбора нет - используем русский по умолчанию
+//  return 'ru';
+//}
+//
+//// 3. Загрузка переводов из JSON-файла
+//async function loadTranslations(lang) {
+//  try {
+//    const response = await fetch(`translations/${languages[lang].file}`);
+//    if (!response.ok) throw new Error('Файл переводов не найден');
+//    translations = await response.json();
+//  } catch (error) {
+//    console.error('Ошибка загрузки переводов:', error);
+//    // Запасные варианты переводов на случай ошибки
+//    translations = {
+//      welcome: lang === 'en' ? "Welcome" : "Добро пожаловать",
+//      description: lang === 'en' ? "This is a demo text." : "Это демонстрационный текст."
+//    };
+//  }
+//}
+//
+//// 4. Обновление интерфейса согласно текущему языку
+//function updateUI() {
+//  // Устанавливаем атрибут lang для всего документа
+//  document.documentElement.lang = currentLang;
+//  
+//  // Обновляем текст на кнопке переключения языка
+//  currentLanguage.textContent = languages[currentLang].name;
+//  
+//  // Обходим все элементы с атрибутом data-i18n
+//  document.querySelectorAll('[data-i18n]').forEach(el => {
+//    const key = el.getAttribute('data-i18n');
+//    
+//    // Для обычных элементов с текстом
+//    if (translations[key]) {
+//      el.innerHTML = translations[key];  // Используем innerHTML для сохранения HTML-разметки
+//    }
+//    
+//    // Для ссылок (обновляем атрибут href)
+//    const hrefKey = `${key}-href`;
+//    if (translations[hrefKey] && el.tagName === 'A') {
+//      el.href = translations[hrefKey];
+//    }
+//  });
+//}
+//
+//// 5. Создание выпадающего списка языков
+//function createLanguageDropdown() {
+//  languageDropdown.innerHTML = '';  // Очищаем список
+//  
+//  // Добавляем все языки кроме текущего
+//  Object.entries(languages).forEach(([code, lang]) => {
+//    if (code === currentLang) return;
+//    
+//    const option = document.createElement('div');
+//    option.className = 'language-option';
+//    option.textContent = lang.name;
+//    
+//    // Обработчик клика по варианту языка
+//    option.addEventListener('click', () => switchLanguage(code));
+//    languageDropdown.appendChild(option);
+//  });
+//}
+//
+//// 6. Переключение языка
+//async function switchLanguage(newLang) {
+//  currentLang = newLang;
+//  // Сохраняем выбор в localStorage
+//  localStorage.setItem('lang', currentLang);
+//  // Загружаем новые переводы
+//  await loadTranslations(currentLang);
+//  // Обновляем интерфейс
+//  updateUI();
+//  // Перестраиваем выпадающий список
+//  createLanguageDropdown();
+//  // Закрываем выпадающее меню
+//  closeDropdown();
+//}
+//
+//// 7. Управление выпадающим меню
+//function toggleDropdown() {
+//  // Переключаем видимость меню
+//  languageDropdown.classList.toggle('_show');
+//  // Анимируем стрелку
+//  arrow.classList.toggle('up');
+//}
+//
+//function closeDropdown() {
+//  // Скрываем меню
+//  languageDropdown.classList.remove('_show');
+//  // Возвращаем стрелку в исходное положение
+//  arrow.classList.remove('up');
+//}
+//
+//// 8. Настройка обработчиков событий
+//function setupEventListeners() {
+//  // Клик по кнопке переключения языка
+//  languageBtn.addEventListener('click', toggleDropdown);
+//  
+//  // Клик в любом месте документа
+//  document.addEventListener('click', (e) => {
+//    // Если клик был не по кнопке - закрываем меню
+//    if (!languageBtn.contains(e.target)) {
+//      closeDropdown();
+//    }
+//  });
+//}
+//
+//// Запускаем приложение
+//init();
+//------------------------------------------------------------------------Переключение языков

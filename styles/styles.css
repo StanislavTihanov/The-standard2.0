@@ -430,6 +430,53 @@ body {
 }
 
 /*----------------------------------burger--------------------------------*/
+/*----------------------------------language--------------------------------*/
+.language {
+  position: relative;
+  z-index: 99;
+  font-family: "Inter";
+  display: inline-block;
+  cursor: pointer;
+}
+.language__btn {
+  background-color: inherit;
+  color: var(--color-yellow);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  font-size: 18px;
+  width: 30px;
+  margin-right: 15px;
+}
+.language__arrow {
+  margin-top: -5px;
+}
+.language__arrow.up {
+  transform: rotate(180deg);
+  margin-top: 0px;
+}
+.language__dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  border-radius: 4px;
+  display: none;
+  z-index: 100;
+}
+
+.language__dropdown._show {
+  display: block;
+}
+
+.language-option {
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--color-yellow);
+}
+
+/*----------------------------------language--------------------------------*/
 /*----------------------------------breadcrumbs--------------------------------*/
 .breadcrumbs {
   margin-bottom: 50px;
@@ -535,6 +582,20 @@ body {
   grid-template-rows: 1fr;
   opacity: 1;
   margin-top: 0px;
+}
+
+.accordion__title {
+  cursor: pointer;
+}
+
+.accordion__content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+}
+
+.accordion__content.active {
+  max-height: 500px;
 }
 
 /*----------------------------------accordion--------------------------------*/
@@ -989,101 +1050,15 @@ input[type=radio] {
   display: none;
 }
 
-/*---------------------------------------tabs----------------------------*/
-/*-----------------------------------quiz--------------------------------*/
-.quiz__progress {
-  margin-bottom: 10px;
+.tabs__content {
+  display: none;
 }
-.quiz-inner {
-  background: var(--color-black);
-  height: 2px;
+
+.tabs__content.active-tab {
   display: block;
-  transition: all 0.8s ease 0s;
 }
 
-.quiz-form__title {
-  margin-bottom: 15px;
-}
-.quiz-form__radio {
-  position: absolute;
-  opacity: 0;
-  z-index: -1;
-  width: 0;
-  height: 0;
-}
-
-.custom-radio {
-  display: inline-block;
-  width: 16px;
-  height: 16px;
-  background: #FFFFFF;
-  border: 2px solid #7e9bbd;
-  border-radius: 50%;
-  vertical-align: text-top;
-  position: relative;
-}
-
-.custom-radio::before {
-  position: absolute;
-  content: "";
-  display: inline-block;
-  width: 8px;
-  height: 8px;
-  background: #1280E5;
-  border-radius: 50%;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(0);
-  transition: 0.2s ease-in;
-}
-
-.quiz-form__radio:checked + .custom-radio::before {
-  transform: translate(-50%, -50%) scale(1);
-}
-
-.quiz-form__buttons {
-  margin-bottom: 10px;
-  display: flex;
-  gap: 20px;
-}
-.quiz-form__checkbox {
-  position: absolute;
-  opacity: 0;
-  width: 0;
-  height: 0;
-  z-index: -1;
-}
-
-.custom-checkbox {
-  position: relative;
-  display: inline-block;
-  width: 20px;
-  height: 20px;
-  background: #FFFFFF;
-  border: 2px solid #1280E5;
-  border-radius: 4px;
-  vertical-align: sub;
-  margin-right: 5px;
-}
-
-.custom-checkbox::before {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%) scale(0);
-  transition: 0.2s ease-in;
-  content: "";
-  display: inline-block;
-  width: 10px;
-  height: 10px;
-  background-color: #1280E5;
-}
-
-.quiz-form__checkbox:checked + .custom-checkbox::before {
-  transform: translate(-50%, -50%) scale(1);
-}
-
-/*-----------------------------------quiz--------------------------------*/
+/*---------------------------------------tabs----------------------------*/
 /*----------------------------------footer--------------------------------*/
 .footer {
   padding: 20px 0px;
