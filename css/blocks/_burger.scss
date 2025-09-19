@@ -1,0 +1,32 @@
+/*----------------------------------burger--------------------------------*/
+.burger {
+    display: none;
+    @include table {
+            width: 36px;
+            height: 36px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            transition: all 0.3s;
+            z-index: 999;
+            cursor: pointer;
+            padding: 4px;
+            &__line {
+                height: 2px;
+                transition: all 0.3s ease 0s;
+                background: #000;
+                border-radius: 2px;
+        }
+            &._active .burger__line:first-child{
+                transform: rotate(45deg) translate(7px, 6px);
+        }
+            &._active .burger__line:nth-child(2){
+                transform: scale(0);
+        }
+            &._active .burger__line:last-child{
+                transform: rotate(-45deg) translate(6px, -6px);
+        }
+    }
+}
+
+/*----------------------------------burger--------------------------------*/

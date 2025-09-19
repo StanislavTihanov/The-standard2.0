@@ -94,6 +94,27 @@ document.addEventListener ('click', (e) => {
 })
 //------------------------------------------------------------------------закрытие меню при клике вне его
 
+//------------------------------------------------------------------------Убераем весячие предлоги
+document.addEventListener("DOMContentLoaded", function () {
+  const prepositions = [" в", " с", " на", " по", " о", " к", " у", " и", " за", " из", " от", "для", "над"];
+
+  function replacePrepositions(node) {
+    if (node.nodeType === Node.TEXT_NODE) {
+      node.textContent = node.textContent.replace(
+        new RegExp(`(${prepositions.join("|")}) `, "gi"),
+        "$1\u00A0" // \u00A0 — неразрывный пробел
+      );
+    } else {
+      for (let child of node.childNodes) {
+        replacePrepositions(child);
+      }
+    }
+  }
+
+  replacePrepositions(document.body);
+});
+//------------------------------------------------------------------------Убераем весячие предлоги
+
 //------------------------------------------------------------------------Fancybox
 //document.addEventListener("DOMContentLoaded", function () {
 //  if (typeof Fancybox !== "undefined" && typeof Fancybox.bind === "function") {
@@ -180,7 +201,9 @@ document.addEventListener ('click', (e) => {
 //    this.container = document.querySelector('.filtermenu__container');
 //    this.posts = Array.from(this.container.querySelectorAll('.post'));  // Собираем все посты один раз в массив
 //    
-//    this.updateMenu('all');
+//    // Устанавливаем активным первый элемент по умолчанию
+//    this.updateMenu('01');
+//    this.updateGallery('01');
 //    this.filterMenuList.forEach(item => item.addEventListener('click', (event) => this.onClickFilterMenu(event)));
 //  }
 //
@@ -193,28 +216,23 @@ document.addEventListener ('click', (e) => {
 //  }
 //
 //  updateMenu(targetFilter) {
-//    this.filterMenuList.forEach(item => item.classList.remove('active_'));
+//    this.filterMenuList.forEach(item => item.classList.remove('show'));
 //    const activeItem = Array.from(this.filterMenuList).find(item => item.getAttribute('data-filter') === targetFilter);
-//    if (activeItem) activeItem.classList.add('active_');
+//    if (activeItem) activeItem.classList.add('show');
 //  }
 //
 //  updateGallery(targetFilter) {
-//    // Оптимизация через фильтрацию всех постов разом
-//    const postsToShow = targetFilter === 'all'
-//      ? this.posts
-//      : this.posts.filter(post => post.classList.contains(targetFilter));
-//    
-//    const postsToHide = this.posts.filter(post => !postsToShow.includes(post));
-//
-//    // Анимация скрытия и показа
-//    this.container.style.opacity = 0;
-//    setTimeout(() => {
-//      postsToHide.forEach(post => post.style.display = 'none');
-//      postsToShow.forEach(post => post.style.display = '');
-//      this.container.style.opacity = 1;
-//    }, 300);
+//    // Показываем только посты с соответствующим фильтром
+//    this.posts.forEach(post => {
+//      if (post.classList.contains(targetFilter)) {
+//        post.style.display = '';
+//      } else {
+//        post.style.display = 'none';
+//      }
+//    });
 //  }
 //}
+//
 //const filterGallery = new FilterGallery();
 
 
@@ -596,26 +614,7 @@ document.addEventListener ('click', (e) => {
 //  });
 //});
 ////------------------------------------------------------------------------Обработка форм
-//------------------------------------------------------------------------Убераем весячие предлоги
-document.addEventListener("DOMContentLoaded", function () {
-  const prepositions = [" в", " с", " на", " по", " о", " к", " у", " и", " за", " из", " от", "для", "над"];
 
-  function replacePrepositions(node) {
-    if (node.nodeType === Node.TEXT_NODE) {
-      node.textContent = node.textContent.replace(
-        new RegExp(`(${prepositions.join("|")}) `, "gi"),
-        "$1\u00A0" // \u00A0 — неразрывный пробел
-      );
-    } else {
-      for (let child of node.childNodes) {
-        replacePrepositions(child);
-      }
-    }
-  }
-
-  replacePrepositions(document.body);
-});
-//------------------------------------------------------------------------Убераем весячие предлоги
 //------------------------------------------------------------------------Tabs
 //const tabsButton = document.querySelectorAll('.tabs-button');
 //const tabsContent = document.querySelectorAll('.tabs__content');

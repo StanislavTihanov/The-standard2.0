@@ -1,14 +1,13 @@
 
 <!----------------------------------------------------поиск-->
-
   <div class="search">
       <div class="search__box">
         <div class="search__block">
           <div class="search__window">
             <label class="search__label">
               <img src="images/search.svg" alt="search icon">
-              <span>Поиск</span>
-              <input class="search__label_input" type="text">
+              <span class="search__text">Поиск</span>
+              <input class="search__input" type="text">
             </label>
           </div>
         </div>
@@ -17,16 +16,13 @@
         </button>
       </div>
   </div>
-  
 <!------------------------------------------------------поиск-->
   
 <!------------------------------------------------------таймер-->
-<h2 id="countdown">10:00:00:00</h2>
+  <h2 id="countdown">10:00:00:00</h2>
 <!------------------------------------------------------таймер-->
 
-
-  <!------------------------------------------------------хлебные крошки-->
-  
+<!------------------------------------------------------хлебные крошки-->
   <div class="breadcrumbs">
     <ul class="breadcrumbs__list" itemscope itemtype="http://schema.org/BreadcrumbList">
       <li class="breadcrumbs__item" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
@@ -47,22 +43,21 @@
       </li>
     </ul>
   </div>
-  <!------------------------------------------------------хлебные крошки-->
+<!------------------------------------------------------хлебные крошки-->
   
-  <!------------------------------------------------------preloader-->
-    <div class="preloader" id="preloader">
-      <div class="preloader__loader">
-        <div class="preloader__loading">
-          <div class="loading">
-            <div></div>
-          </div>
+<!------------------------------------------------------preloader-->
+  <div class="preloader" id="preloader">
+    <div class="preloader__loader">
+      <div class="preloader__loading">
+        <div class="loading">
+          <div></div>
         </div>
       </div>
     </div>
-  <!------------------------------------------------------preloader-->
+  </div>
+<!------------------------------------------------------preloader-->
   
-  <!------------------------------------------------------слайдер-->
-  
+<!------------------------------------------------------слайдер-->
   <div class="slider">
     <div class="swiper-wrapper">
       <div class="swiper-slide">
@@ -73,42 +68,45 @@
     <div class="swiper-button-prev"></div>
     <div class="swiper-button-next"></div>
   </div>
+<!------------------------------------------------------слайдер-->
   
-  <!------------------------------------------------------слайдер-->
-  
-  <!------------------------------------------------------сортировка по атрибутам-->
-  
+<!------------------------------------------------------Появление большего контента-->
+  <div class="spoiler">
+    <input class="spoiler__checkbox" type="checkbox" id="sp">
+    <div class="spoiler__body">
+      <div class="spoiler__preview">Это длинный текст...</div>
+      <div class="spoiler__content">Это длинный текст, которвый мы хотим скрыть</div>
+    </div>
+    <label class="spoiler__label" for="sp"></label>
+  </div>
+<!------------------------------------------------------Появление большего контента-->
+
+<!------------------------------------------------------сортировка по атрибутам-->
   <div class="filtermenu">
     <ul class="filtermenu__list">
-      <li data-filter="all">Все</li>
-      <li data-filter="description">описание</li>
-      <li data-filter="characteristic">характеристики</li>
-      <li data-filter="complete">комплектация</li>
-      <li data-filter="documentation">документация</li>
+      <li class="filtermenu__item show" data-filter="01">описание</li>
+      <li class="filtermenu__item" data-filter="02">характеристики</li>
+      <li class="filtermenu__item" data-filter="03">комплектация</li>
+      <li class="filtermenu__item" data-filter="04">документация</li>
     </ul>
     <div class="filtermenu__container">
-      <div class="post all">
+      <div class="post 01">
         
       </div>
-      <div class="post description">
+      <div class="post 02">
         
       </div>
-      <div class="post characteristic">
+      <div class="post 03">
         
       </div>
-      <div class="post complete">
-        
-      </div>
-      <div class="post documentation">
+      <div class="post 04">
         
       </div>
     </div>
   </div>
+<!------------------------------------------------------сортировка по атрибутам-->
   
-  <!------------------------------------------------------сортировка по атрибутам-->
-  
-  <!------------------------------------------------------форма обратной связи-->
-  
+<!------------------------------------------------------форма обратной связи-->
   <form class="form" action="send.php" method="POST" enctype="multipart/form-data" id="form">
     <div class="form__item">
      <label class="form__label" for="formName">Имя*</label>
@@ -157,11 +155,9 @@
    </div>
    <button class="form__button" type="submit">Отправить</button>
   </form>
+<!------------------------------------------------------форма обратной связи-->
   
-  <!------------------------------------------------------форма обратной связи-->
-  
-  <!------------------------------------------------------popup-->
-  
+<!------------------------------------------------------popup-->
   <a class="popup-link" href="#popup">Открытие popup</a>
   <div class="popup" id="popup">
     <div class="popup__body">
@@ -228,18 +224,16 @@
       </div>
     </div>
   </div>
+<!------------------------------------------------------popup-->
   
-  <!------------------------------------------------------popup-->
-  
-  <!------------------------------------------------------dropdown-select-->
-  
+<!------------------------------------------------------dropdown-select-->
   <div class="dropdown">
     <button class="dropdown__button">Select 1</button>
     <ul class="dropdown__list">
-      <li class="dropdown__list-item" data-value="1">Select 1</li>
-      <li class="dropdown__list-item" data-value="2">Select 2</li>
-      <li class="dropdown__list-item" data-value="3">Select 3</li>
-      <li class="dropdown__list-item" data-value="4">Select 4</li>
+      <li class="dropdown__item" data-value="1">Select 1</li>
+      <li class="dropdown__item" data-value="2">Select 2</li>
+      <li class="dropdown__item" data-value="3">Select 3</li>
+      <li class="dropdown__item" data-value="4">Select 4</li>
     </ul>
     <input type="text" name="select-category" value="" class="dropdown__input-hidden">
   </div>
@@ -251,22 +245,18 @@
       <option class="select__option" value="3">Market 3</option>
     </select>
   </div>
-
-
-  <!------------------------------------------------------dropdown-select-->
+<!------------------------------------------------------dropdown-select-->
   
-  <!------------------------------------------------------checkbox-->
-
+<!------------------------------------------------------checkbox-->
   <div class="checkbox">
     <input class="checkbox__input _req" id="formAgreement" type="checkbox" name="agreement">
     <label class="checkbox__label" for="formAgreement">
       <span class="checkbox__text">Я принимаю <a class="form__link" href="policy.html">политику конфиденциальности</a></span>
     </label>
   </div>
- 
-  <!------------------------------------------------------checkbox-->
+<!------------------------------------------------------checkbox-->
   
-  <!------------------------------------------------------radio-buttons-->
+<!------------------------------------------------------radio-buttons-->
   <div class="radio-buttons">
     <label class="radio-button">
       <input type="radio" name="option-1" value="1"/>
@@ -279,10 +269,9 @@
       <span class="label-text">Futures Affiliate</span>
     </label>
   </div>
-  <!------------------------------------------------------radio-buttons-->
+<!------------------------------------------------------radio-buttons-->
   
-  <!------------------------------------------------------Accordion-->
-  
+<!------------------------------------------------------Accordion-->
   <div class="accordion">
     <div class="accordion__block">
     <details class="accordion__details" name="faq">
@@ -335,10 +324,10 @@
     </div>
     </div>
   </div>
-  <!------------------------------------------------------Accordion-->
+<!------------------------------------------------------Accordion-->
   
-  
-  <!-----------------------------------------------------Tabs-->
+<!-----------------------------------------------------Tabs-->
+<!--------------------чистый css---------------------------------Tabs-->
   <div class="tabs">
     <input type="radio" name="tabs" id="tab-1" checked>
     <input type="radio" name="tabs" id="tab-2">
@@ -364,7 +353,9 @@
        </div>
     </div>
   </div>
+<!--------------------чистый css---------------------------------Tabs-->
 
+<!--------------------js---------------------------------Tabs-->
   <div class="tabs">
     <div class="tabs__nav">
       <button class="tabs-button active-tab" type="button">Кнопка 1</button>
@@ -383,9 +374,10 @@
       </div>
     </div>
   </div>
-  <!-----------------------------------------------------Tabs-->
+<!--------------------js---------------------------------Tabs-->
+<!-----------------------------------------------------Tabs-->
 
-  <!-----------------------------------------------------Masonry-->
+<!-----------------------------------------------------Masonry-->
   <div class="masonry">
     <div class="masonry__block">
       1 Lorem ipsum dolor sit amet consectetur, adipisicing elit. Itaque, porro ut assumenda id odit debitis amet voluptates eum iure ducimus odio adipisci nihil cumque illum. Eum dicta quisquam enim laboriosam!
@@ -415,4 +407,4 @@
       9 Lorem ipsum dolor sit amet consectetur, Itaque, porro ut assumenda id odit debitis amet voluptates eum iure ducimus odio adipisci nihil cumque illum. Eum dicta quisquam enim laboriosam!
     </div>
   </div>
-  <!-----------------------------------------------------Masonry-->
+<!-----------------------------------------------------Masonry-->

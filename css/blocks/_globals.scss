@@ -23,7 +23,7 @@ body {
     margin: 0 auto;
     padding: 0px 10px;
 }
-.section {
+section {
     padding: 50px 0px;
 }
 ._ibg {
@@ -52,7 +52,7 @@ body {
     color: var(--color-black);
     line-height: 100%;
 }
-.btn {
+.button {
     display: inline-block;
     padding: 16px 32px;
     border-radius: 30px;
@@ -60,11 +60,11 @@ body {
     transition: all 0.3s ease;
     width: 100%;
     text-align: center;
-    @include fluid-text(20, 50);
+    @include fluid-text(20, 30);
     font-weight: 700;
     
 }
-.btn-outline {
+.button-outline {
     border: 1px solid var(--color-blue);
     background-color: var(--color-white);
     @include hover {
@@ -75,7 +75,7 @@ body {
         background-color: #496cf8;
     }
 }
-.btn-filled {
+.button-filled {
     background-color: var(--color-blue);
     border: 1px solid var(--color-blue);
     color: var(--color-white);

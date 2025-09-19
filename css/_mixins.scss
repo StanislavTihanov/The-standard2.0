@@ -17,7 +17,6 @@
         @content;
     }
 }
-
 @mixin hover {
     @media (hover: hover) {
       &:hover {

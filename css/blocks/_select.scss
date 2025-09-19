@@ -51,7 +51,7 @@
             transform: rotate(-45deg);
         }
       }
-      &__list {
+    &__list {
         display: none;
         position: absolute;
         overflow: hidden;
@@ -65,17 +65,17 @@
         &--active {
             display: block;
         }
-        &-item {
-            border-bottom: 0;
-            cursor: pointer;
-            &:not(:last-child) {
-                margin-bottom: 1rem;
-            }
-            &:hover {
-                color: #00aa4b;
-            }
+    }
+    &__item {
+        border-bottom: 0;
+        cursor: pointer;
+        &:not(:last-child) {
+            margin-bottom: 1rem;
         }
-      }
+        &:hover {
+            color: #00aa4b;
+        }
+    }
     &__input-hidden {
         display: none;
     }

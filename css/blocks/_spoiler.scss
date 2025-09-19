@@ -1,0 +1,26 @@
+/*----------------------------------spoiler--------------------------------*/
+.spoiler {
+	&__checkbox {
+        display: none;
+        &:checked ~ .spoiler__body .spoiler__content {
+            display: block;
+        }
+        &:checked ~ .spoiler__body .spoiler__preview {
+            display: none;
+        }
+        &:checked ~ .spoiler__label::after {
+            content: "Скрыть";
+        }
+	}
+	&__content {
+        display: none;
+	}
+	&__label {
+        cursor: pointer;
+        &::after {
+            content: "Читать";
+        }
+	}
+}
+
+/*----------------------------------spoiler--------------------------------*/
