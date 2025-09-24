@@ -297,7 +297,7 @@ section {
 .search__btn._act {
   opacity: 0;
 }
-.search__label_input {
+.search__input {
   border-bottom: 1px solid rgb(17, 53, 167);
   width: 100%;
 }
@@ -966,14 +966,14 @@ section {
 .dropdown__list--active {
   display: block;
 }
-.dropdown__list-item {
+.dropdown__item {
   border-bottom: 0;
   cursor: pointer;
 }
-.dropdown__list-item:not(:last-child) {
+.dropdown__item:not(:last-child) {
   margin-bottom: 1rem;
 }
-.dropdown__list-item:hover {
+.dropdown__item:hover {
   color: #00aa4b;
 }
 .dropdown__input-hidden {
